@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://TileMaps/World.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -12,7 +12,11 @@ extents = Vector2( 256, 32.8012 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 480, 32 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 1753.28, 192.896 )
+
 [node name="Level1" type="Node2D"]
+position = Vector2( -1, 0 )
 
 [node name="Tiles Solid" type="TileMap" parent="."]
 position = Vector2( -1, 0 )
@@ -67,7 +71,7 @@ centered = false
 [node name="Back Blocks" type="ParallaxLayer" parent="ParallaxBackground"]
 modulate = Color( 0.309804, 0.164706, 0.345098, 0.137255 )
 motion_scale = Vector2( 0.25, 0.25 )
-motion_offset = Vector2( 0, -500 )
+motion_offset = Vector2( 0, -1000 )
 motion_mirroring = Vector2( 2560, 1920 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/Back Blocks"]
@@ -96,3 +100,13 @@ motion_mirroring = Vector2( 1120, 840 )
 scale = Vector2( 1.75, 1.75 )
 texture = ExtResource( 5 )
 centered = false
+
+[node name="FallZone" type="Area2D" parent="."]
+position = Vector2( 2659.16, 1170.96 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallZone"]
+shape = SubResource( 3 )
+[connection signal="body_entered" from="FallZone" to="Player" method="_on_FallZone_body_entered"]
